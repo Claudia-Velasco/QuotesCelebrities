@@ -29,7 +29,7 @@ class QuoteAllFragment : Fragment() {
         _binding = FragmentQuoteAllBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-       // observerList(binding.tvData)
+        observerList(binding.tvData)
 
         return root
     }

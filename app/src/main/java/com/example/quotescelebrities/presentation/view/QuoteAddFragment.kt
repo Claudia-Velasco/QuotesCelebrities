@@ -30,7 +30,7 @@ class QuoteAddFragment : Fragment() {
         val root: View = binding.root
 
         binding.btnAddQuote.setOnClickListener {
-            // observerAdd()
+            observerAdd()
         }
         return root
     }
@@ -42,7 +42,6 @@ class QuoteAddFragment : Fragment() {
 
     fun observerAdd() {
         lifecycleScope.launch {
-            //GUARDAR QUOTE
             val quoteCelebritie = QuoteModel(
                 id = binding.tvAddId.text.toString().toInt(),
                 quote = binding.tvAddQuote.text.toString(),

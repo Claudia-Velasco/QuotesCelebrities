@@ -26,14 +26,12 @@ class QuoteRandomFragment : Fragment() {
     ): View? {
         _binding = FragmentQuoteRandomBinding.inflate(layoutInflater, container, false)
 
-        /*
         quotRandomViewModel.randomQuote()
         observer()
         binding.viewContainer.setOnClickListener {
             quotRandomViewModel.randomQuote()
         }
 
-         */
         return binding.root
     }
 
