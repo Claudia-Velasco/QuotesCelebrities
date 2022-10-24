@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class QuoteRepositoryImpl @Inject constructor
-    (private val localDataSource: QuoteLocalDataSource):
+    (private val localDataSource: QuoteLocalDataSource) :
     QuoteRepository {
 
     override suspend fun getQuoteRandom(): Flow<QuoteModel> {
@@ -18,5 +18,13 @@ class QuoteRepositoryImpl @Inject constructor
 
     override suspend fun getQuote(quoteId: Int): Flow<QuoteModel> {
         return localDataSource.getQuote(quoteId)
+    }
+
+    override suspend fun addQuote(quoteModel: QuoteModel) {
+        localDataSource.insert(quote = quoteModel)
+    }
+
+    override suspend fun getAllQuote(): Flow<List<QuoteModel>> {
+        return localDataSource.getQuotes()
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.quotescelebrities.presentation.view.QuoteRandomFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_quote_random" />
+
+    <fragment
+        android:id="@+id/nav_add"
+        android:name="com.example.quotescelebrities.presentation.view.QuoteAddFragment"
+        android:label="@string/menu_add"
+        tools:layout="@layout/fragment_quote_add" />
+
+    <fragment
+        android:id="@+id/nav_all"
+        android:name="com.example.quotescelebrities.presentation.view.QuoteAllFragment"
+        android:label="@string/menu_all"
+        tools:layout="@layout/fragment_quote_all" />
+
+</navigation>

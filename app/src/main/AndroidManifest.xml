@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Quotescelebrities"
         tools:targetApi="31">
         <activity
-            android:name="com.example.quotescelebrities.presentation.view.QuoteRandomActivity"
+            android:name="com.example.quotescelebrities.presentation.view.QuoteAddActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
