@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.quotescelebrities.databinding.FragmentQuoteAllBinding
-import com.example.quotescelebrities.domain.model.QuoteModel
 import com.example.quotescelebrities.presentation.viewmodel.QuoteAllViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -18,20 +17,17 @@ import kotlinx.coroutines.launch
 class QuoteAllFragment : Fragment() {
     private var _binding: FragmentQuoteAllBinding? = null
     private val binding get() = _binding!!
-    private val quoteAllViewModel: QuoteAllViewModel by viewModels()
+    private lateinit var viewModel: QuoteAllViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentQuoteAllBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
+        viewModel = ViewModelProvider(this)[QuoteAllViewModel::class.java]
         observerList(binding.tvData)
-
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -39,17 +35,14 @@ class QuoteAllFragment : Fragment() {
         _binding = null
     }
 
-    fun observerList(tv: TextView) {
+    private fun observerList(textView: TextView) {
         lifecycleScope.launch {
-            var data = ""
-            quoteAllViewModel.getAllQuote()
-            quoteAllViewModel.quoteModelList.collect { listQuotes ->
-                listQuotes.forEach { quoteModel ->
-                    data += "${quoteModel.id}-${quoteModel.quote}-${quoteModel.author} \n"
+            viewModel.getAllQuote()
+            viewModel.quoteModelList.collect { listQuotes ->
+                listQuotes.forEach { quote ->
+                    textView.append("${quote.id} - ${quote.quote} - ${quote.author} \n")
                 }
-                tv.append(data)
             }
         }
     }
-
 }
