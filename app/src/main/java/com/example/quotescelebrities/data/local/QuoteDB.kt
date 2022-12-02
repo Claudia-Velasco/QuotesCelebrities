@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 @Database(entities = [QuoteEntity::class, ], version = 1)
 abstract class QuoteDB : RoomDatabase() {
 
@@ -70,11 +69,6 @@ abstract class QuoteDB : RoomDatabase() {
 
             quoteDao.deleteAll()
 
-            val quote = QuoteEntity(
-                id = 1,
-                quote = "Solo se que no se nada",
-                author = "Sócrates"
-            )
             val quotes = listOf(
                 QuoteModel(
                     id=1,

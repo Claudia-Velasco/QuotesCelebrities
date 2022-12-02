@@ -1,11 +1,11 @@
 package com.example.quotescelebrities.data.local
 
-import com.example.quotescelebrities.data.model.QuoteResponse
+import com.example.quotescelebrities.data.remote.QuoteApiResponse
 import com.example.quotescelebrities.domain.model.QuoteModel
 import kotlinx.coroutines.flow.Flow
 
 interface QuoteLocalDataSource {
-    suspend fun getQuotes(): Flow<QuoteResponse>
+    suspend fun getQuotes(): Flow<QuoteApiResponse>
     fun getQuote(quoteId: Int): Flow<QuoteModel>
     fun getQuoteRandom(): Flow<QuoteModel>
 

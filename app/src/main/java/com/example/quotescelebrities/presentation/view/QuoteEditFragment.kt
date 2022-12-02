@@ -37,6 +37,7 @@ class QuoteEditFragment : Fragment() {
         _binding = FragmentQuoteEditBinding.inflate(inflater, container, false)
         quoteEditViewModel = ViewModelProvider(this)[QuoteEditViewModel::class.java]
         val root: View = binding.root
+
         //----------------------------
         with(binding) {
             btnSave.setOnClickListener {
@@ -50,7 +51,7 @@ class QuoteEditFragment : Fragment() {
                 }
                 val alert = CustomAlert()
                 alert.showDialog(this@QuoteEditFragment.parentFragment, getString(R.string.saved))
-
+                activity?.onBackPressed()
             }
         }
         return root

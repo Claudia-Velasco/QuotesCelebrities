@@ -1,9 +1,9 @@
-package com.example.quotescelebrities.data.model
+package com.example.quotescelebrities.data.remote
 
 import com.example.quotescelebrities.domain.model.QuoteModel
 import com.google.gson.annotations.SerializedName
 
-data class QuoteResponse(
+data class QuoteApiResponse(
     @SerializedName("success")
     var success: Boolean,
 

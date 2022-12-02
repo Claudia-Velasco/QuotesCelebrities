@@ -4,18 +4,18 @@ import com.example.quotescelebrities.core.utils.toEntity
 import com.example.quotescelebrities.core.utils.toListQuoteModel
 import com.example.quotescelebrities.core.utils.toQuoteModel
 import com.example.quotescelebrities.data.local.daos.QuoteDao
-import com.example.quotescelebrities.data.model.QuoteResponse
+import com.example.quotescelebrities.data.remote.QuoteApiResponse
 import com.example.quotescelebrities.domain.model.QuoteModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class QuoteLocalDataSourceImpl @Inject constructor(private val quoteDao: QuoteDao) :
     QuoteLocalDataSource {
-    override suspend fun getQuotes(): Flow<QuoteResponse> {
+    override suspend fun getQuotes(): Flow<QuoteApiResponse> {
         val quotesEntity = quoteDao.getQuotes()
         val data = quotesEntity.map { it.toListQuoteModel() }
         val quotesModel = data.first()
-        return flow { emit(QuoteResponse(true, "list quotes", quotesModel)) }
+        return flow { emit(QuoteApiResponse(true, "list quotes", quotesModel)) }
     }
 
     override fun getQuote(quoteId: Int): Flow<QuoteModel> {
