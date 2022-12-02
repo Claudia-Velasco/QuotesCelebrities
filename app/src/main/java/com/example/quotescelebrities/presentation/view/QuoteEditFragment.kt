@@ -1,36 +1,43 @@
 package com.example.quotescelebrities.presentation.view
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.quotescelebrities.R
-import com.example.quotescelebrities.databinding.FragmentQuoteAddBinding
+import com.example.quotescelebrities.databinding.FragmentQuoteEditBinding
 import com.example.quotescelebrities.domain.model.QuoteModel
-import com.example.quotescelebrities.presentation.viewmodel.QuoteAddViewModel
+import com.example.quotescelebrities.presentation.viewmodel.QuoteEditViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class QuoteAddFragment : Fragment() {
-    private var _binding: FragmentQuoteAddBinding? = null
+class QuoteEditFragment : Fragment() {
+    private var _binding: FragmentQuoteEditBinding? = null
     private val binding get() = _binding!!
-    private lateinit var quoteAddViewModel: QuoteAddViewModel
+    private lateinit var quoteEditViewModel: QuoteEditViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.etId.setText(arguments?.getInt("id", 0).toString())
+        binding.etQuote.setText(arguments?.getString("quote", "").toString())
+        binding.etAuthor.setText(arguments?.getString("author", "").toString())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentQuoteAddBinding.inflate(inflater, container, false)
-        quoteAddViewModel = ViewModelProvider(this)[QuoteAddViewModel::class.java]
+        _binding = FragmentQuoteEditBinding.inflate(inflater, container, false)
+        quoteEditViewModel = ViewModelProvider(this)[QuoteEditViewModel::class.java]
         val root: View = binding.root
-
+        //----------------------------
         with(binding) {
             btnSave.setOnClickListener {
                 val quoteModel = QuoteModel(
@@ -39,13 +46,14 @@ class QuoteAddFragment : Fragment() {
                     author = etAuthor.text.toString(),
                 )
                 lifecycleScope.launch(Dispatchers.IO) {
-                    quoteAddViewModel.addQuote(quoteModel)
+                    quoteEditViewModel.editQuote(quoteModel)
                 }
                 val alert = CustomAlert()
-                alert.showDialog(this@QuoteAddFragment.parentFragment, getString(R.string.saved))
+                alert.showDialog(this@QuoteEditFragment.parentFragment, getString(R.string.saved))
 
             }
         }
         return root
     }
+
 }

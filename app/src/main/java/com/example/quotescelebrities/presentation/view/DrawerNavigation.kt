@@ -1,4 +1,4 @@
-package com.example.quotescelebrities
+package com.example.quotescelebrities.presentation.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,19 +8,20 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.quotescelebrities.databinding.ActivityMainBinding
+import com.example.quotescelebrities.R
+import com.example.quotescelebrities.databinding.ActivityDrawerNavigationBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class DrawerNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityDrawerNavigationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityDrawerNavigationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -32,9 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_random,
-                R.id.nav_add,
-                R.id.nav_all,
+                R.id.nav_home,
+                R.id.nav_quote_add,
+                R.id.nav_quote_list,
+                R.id.nav_login
             ), drawerLayout
         )
 

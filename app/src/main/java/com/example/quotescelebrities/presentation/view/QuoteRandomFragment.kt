@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class QuoteRandomFragment : Fragment() {
-    private lateinit var viewModel: QuoteRandomViewModel
+    private lateinit var quoteRandomViewModel: QuoteRandomViewModel
     private var _binding: FragmentQuoteRandomBinding? = null
     private val binding get() = _binding!!
 
@@ -23,25 +23,24 @@ class QuoteRandomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentQuoteRandomBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[QuoteRandomViewModel::class.java]
-        observer()
-        binding.viewContainer.setOnClickListener { observer() }
-        return binding.root
-    }
+        quoteRandomViewModel = ViewModelProvider(this)[QuoteRandomViewModel::class.java]
+        val root: View = binding.root
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        //----------------------------
+        quoteRandomViewModel.randomQuote()
+        observer()
+        binding.viewContainer.setOnClickListener {
+            quoteRandomViewModel.randomQuote()
+        }
+        return root
     }
 
     private fun observer() {
         lifecycleScope.launch {
-            viewModel.randomQuote()
-            viewModel.quoteModel.collect {
+            quoteRandomViewModel.quoteModel.collect {
                 binding.tvQuote.text = it.quote
                 binding.tvAuthor.text = it.author
             }
         }
     }
-
 }

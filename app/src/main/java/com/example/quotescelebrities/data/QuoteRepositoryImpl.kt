@@ -1,6 +1,7 @@
-package com.example.quotescelebrities.data.remote
+package com.example.quotescelebrities.data
 
 import com.example.quotescelebrities.data.local.QuoteLocalDataSource
+import com.example.quotescelebrities.data.model.QuoteResponse
 import com.example.quotescelebrities.domain.QuoteRepository
 import com.example.quotescelebrities.domain.model.QuoteModel
 import kotlinx.coroutines.flow.Flow
@@ -20,11 +21,15 @@ class QuoteRepositoryImpl @Inject constructor
         return localDataSource.getQuote(quoteId)
     }
 
-    override suspend fun addQuote(quoteModel: QuoteModel) {
-        localDataSource.insert(quote = quoteModel)
+    override suspend fun getQuotes(): Flow<QuoteResponse?> {
+        return localDataSource.getQuotes()
     }
 
-    override suspend fun getAllQuote(): Flow<List<QuoteModel>> {
-        return localDataSource.getQuotes()
+    override suspend fun editQuote(quoteModel: QuoteModel) {
+        return localDataSource.editQuote(quoteModel)
+    }
+
+    override suspend fun addQuote(quoteModel: QuoteModel) {
+        return localDataSource.insert(quoteModel)
     }
 }

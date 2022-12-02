@@ -1,6 +1,6 @@
 package com.example.quotescelebrities.core.di
 
-import com.example.quotescelebrities.data.remote.QuoteRepositoryImpl
+import com.example.quotescelebrities.data.QuoteRepositoryImpl
 import com.example.quotescelebrities.data.local.QuoteLocalDataSource
 import com.example.quotescelebrities.data.local.QuoteLocalDataSourceImpl
 import com.example.quotescelebrities.domain.QuoteRepository

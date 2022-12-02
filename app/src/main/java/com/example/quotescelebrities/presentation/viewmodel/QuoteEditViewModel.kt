@@ -3,7 +3,7 @@ package com.example.quotescelebrities.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quotescelebrities.domain.model.QuoteModel
-import com.example.quotescelebrities.domain.usecase.AddQuoteUseCase
+import com.example.quotescelebrities.domain.usecase.EditQuoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,16 +11,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class QuoteAddViewModel
-@Inject constructor(private val addQuoteUseCase: AddQuoteUseCase) : ViewModel() {
+class QuoteEditViewModel
+@Inject constructor(private val editQuoteUseCase: EditQuoteUseCase) : ViewModel() {
     private val quoteModelInitial = QuoteModel(id = 0, quote = "Solo se que no se nada", author = "Socrates")
     private val _quoteEditMutableStateFlow = MutableStateFlow(quoteModelInitial)
     val quoteModel: StateFlow<QuoteModel> = _quoteEditMutableStateFlow
 
-    fun addQuote(quoteModel: QuoteModel) {
+
+    fun editQuote(quoteModel: QuoteModel) {
 
         viewModelScope.launch {
-            addQuoteUseCase.addQuote(quoteModel = quoteModel)
+            editQuoteUseCase.editQuote(quoteModel = quoteModel)
         }
     }
 }

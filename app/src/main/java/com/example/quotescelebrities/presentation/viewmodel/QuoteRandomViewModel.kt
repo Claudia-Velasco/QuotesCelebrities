@@ -13,17 +13,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuoteRandomViewModel
-@Inject constructor(private val getQuoteRandomUseCase: GetQuoteRandomUseCase
-): ViewModel() {
+@Inject constructor(
+    private val getQuoteRandomUseCase: GetQuoteRandomUseCase
+) : ViewModel() {
 
-    private val quoteModelRandomMutableStateFlow = MutableStateFlow(QuoteModel(0,"",""))
-    val quoteModel: StateFlow<QuoteModel> = quoteModelRandomMutableStateFlow
+    private val _quoteModelRandomMutableStateFlow = MutableStateFlow(QuoteModel(0, "", ""))
+    val quoteModel: StateFlow<QuoteModel> = _quoteModelRandomMutableStateFlow
 
 
     fun randomQuote() {
         viewModelScope.launch {
-            quoteModelRandomMutableStateFlow.value = getQuoteRandomUseCase.getQuoteRandom().first()
-            //_quoteModel.value = GetQuoteUseCase(quoteDAO).getQuote(1).first()
+            _quoteModelRandomMutableStateFlow.value = getQuoteRandomUseCase.getQuoteRandom().first()
         }
     }
 }

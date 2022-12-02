@@ -19,10 +19,3 @@ fun List<QuoteModel>.toListQuoteEntity () =
 
 fun List<QuoteEntity>.toListQuoteModel () =
     map {it.toQuoteModel() }
-
-
-/*
-class extensions {
-}
-
- */
